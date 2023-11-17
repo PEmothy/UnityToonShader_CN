@@ -1,7 +1,9 @@
 # UnityToonShader_CN
-> 对UTS的新版本添加了汉化
-> 
+> 对UTS (Unity Toon Shader)的新版本进行了汉化
+>
 > Unity Toon Shader原项目地址：https://github.com/Unity-Technologies/com.unity.toonshader
+>
+> UTS官方文档：[Unity Toon Shader 概述 |Unity 卡通着色器 |0.9.5 预览版 (unity3d.com)](https://docs.unity3d.com/Packages/com.unity.toonshader@0.9/manual/index.html)
 
 ## 使用方法：
 方法1、已在Package Manager导入Unity Toon shader:
