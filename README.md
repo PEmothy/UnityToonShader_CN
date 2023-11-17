@@ -1,5 +1,5 @@
 # UnityToonShader_CN
-> 对UTS (Unity Toon Shader)的新版本进行了汉化
+> 对UTS (Unity Toon Shader)三渲二着色器的新版本进行了汉化
 >
 > Unity Toon Shader原项目地址：https://github.com/Unity-Technologies/com.unity.toonshader
 >
