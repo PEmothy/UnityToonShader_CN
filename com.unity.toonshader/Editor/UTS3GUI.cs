@@ -597,7 +597,7 @@ namespace UnityEditor.Rendering.Toon
             public static readonly GUIContent maskRenderingFoldout = EditorGUIUtility.TrTextContent("遮罩渲染设置", "由可视合成器控制的遮罩渲染设置。");
             public static readonly GUIContent lightEffectivenessFoldout = EditorGUIUtility.TrTextContent("场景光照效果设置", "对每个参数的场景光照效果。");
 
-            public static readonly GUIContent metaverseSettingsFoldout = EditorGUIUtility.TrTextContent("Metaverse设置（实验性）", "当场景中没有方向光时的默认方向光。");
+            public static readonly GUIContent metaverseSettingsFoldout = EditorGUIUtility.TrTextContent("元宇宙设置（实验性）", "当场景中没有方向光时的默认方向光。");
             public static readonly GUIContent shadowControlMapFoldout = EditorGUIUtility.TrTextContent("阴影控制图设置", "阴影控制图设置。如位置和高光滤波。");
             public static readonly GUIContent pointLightFoldout = EditorGUIUtility.TrTextContent("点光源设置", "点光源设置。如滤波和步进偏移。");
 
@@ -678,9 +678,9 @@ namespace UnityEditor.Rendering.Toon
             public static readonly GUIContent baseColorToOtulineText = new GUIContent("将基础颜色混合到轮廓中", "将基础颜色混合到轮廓颜色中。");
             public static readonly GUIContent outlineColorMapText = new GUIContent("轮廓颜色映射", "将纹理应用为轮廓颜色映射。");
             public static readonly GUIContent bakedNormalForOutlineText = new GUIContent("轮廓的烘焙法线贴图", "使用从其他模型先前烘焙的顶点法线的法线贴图时，可以作为设置法线反演轮廓时的附加载入。");
-            public static readonly GUIContent metaverseLightText = new GUIContent("Metaverse灯光", "启用UTS，使其在场景中没有定向光的情况下正常工作。");
-            public static readonly GUIContent metaverseLightDirectionText = new GUIContent("Metaverse灯光方向", "控制场景中UTS的辅助照明方向。");
-            public static readonly GUIContent invertZaxisDirection = new GUIContent("反向Z轴方向", "反向Metaverse灯光Z轴方向。");
+            public static readonly GUIContent metaverseLightText = new GUIContent("元宇宙灯光", "启用UTS，使其在场景中没有定向光的情况下正常工作。");
+            public static readonly GUIContent metaverseLightDirectionText = new GUIContent("元宇宙灯光方向", "控制场景中UTS的辅助照明方向。");
+            public static readonly GUIContent invertZaxisDirection = new GUIContent("反向Z轴方向", "反向元宇宙灯光Z轴方向。");
             public static readonly GUIContent emissiveScrollAnimationModeText = new GUIContent("动画模式", "控制Emissive纹理的动画滚动。");
             public static readonly GUIContent emissionAnimationText = new GUIContent("发射贴图动画", "启用时，Emission贴图的UV和颜色会发生动画变化。");
             public static readonly GUIContent outlineModeText = new GUIContent("轮廓模式", "指定反向轮廓对象如何生成。");
@@ -1246,7 +1246,7 @@ public static readonly RangeProperty metaverseRangePropText = new RangeProperty(
             EditorGUILayout.EndHorizontal();
             if (isRTHSenabled)
             {
-                EditorGUILayout.LabelField("当启用此功能时，必须将 ShadowRaytracer 组件附加到相机上。");
+                EditorGUILayout.LabelField("当启用此功能时，必须将ShadowRaytracer(阴影光线跟踪器)组件附加到相机上。");
             }
         }
 
@@ -2166,7 +2166,7 @@ public static readonly RangeProperty metaverseRangePropText = new RangeProperty(
             bool isOutlineEnabled = true;
             if (srpDefaultLightModeTag == srpDefaultLightModeName)
             {
-                const string kOutline = "Outline";
+                const string kOutline = "轮廓线";
                 isOutlineEnabled = material.GetShaderPassEnabled(srpDefaultLightModeName);
 
                 EditorGUI.BeginChangeCheck();
@@ -2241,7 +2241,7 @@ public static readonly RangeProperty metaverseRangePropText = new RangeProperty(
                 //                if (_AdvancedOutline_Foldout)
                 {
 
-                    EditorGUILayout .LabelField("Camera Distance for Outline Width");
+                    EditorGUILayout .LabelField("轮廓宽度的摄影机距离");
                     EditorGUI.indentLevel++;
                     GUI_FloatProperty(material, Styles.farthestDistanceText);
                     GUI_FloatProperty(material, Styles.nearestDistanceText);
