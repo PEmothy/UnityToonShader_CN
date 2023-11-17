@@ -13,7 +13,7 @@ namespace UnityEditor.Rendering.Toon
 
         internal const float kVersionX = 0.0f;
         internal const float kVersionY = 9.0f;
-        internal const float kVersionZ = 6.0f;
+        internal const float kVersionZ = 5.0f;
 
         internal static string versionString => "0.9.5-preview";
 
@@ -206,10 +206,11 @@ namespace UnityEditor.Rendering.Toon
         internal const string ShaderDefineIS_CLIPPING_MATTE = "_IS_CLIPPING_MATTE";
 
 
-        protected readonly string[] UtsModeNames = { "Standard", "With Additional Control Maps" };
-        protected readonly string[] EmissiveScrollMode = { "UV Coordinate Scroll", "View Coordinate Scroll" };
-        protected readonly string[] ClippingModeNames = { "Off", "On", "Clip Transparency" };
-        protected readonly string[] StencilModeNames = { "Off", "Draw If Not Equal to", "Replace Stencil Buffer with" };
+        protected readonly string[] UtsModeNames = { "标准", "带有额外的控制贴图" };
+        protected readonly string[] EmissiveScrollMode = { "UV坐标滚动", "视图坐标滚动" };
+        protected readonly string[] ClippingModeNames = { "关闭", "打开", "裁剪透明度" };
+        protected readonly string[] StencilModeNames = { "关闭", "如果不等于则绘制", "用替换Stencil缓冲" };
+
         public enum UTS_Mode : uint
         {
             ThreeColorToon, ShadingGradeMap
@@ -582,298 +583,299 @@ namespace UnityEditor.Rendering.Toon
         //Specify only those that use the m_MaterialEditor method as their UI. For specifying textures and colors on a single line.
         private static class Styles
         {
-            public static readonly GUIContent shaderFoldout = EditorGUIUtility.TrTextContent("Shader Settings", "Shader Settings provides basic settings that are not specific to  cel-shading but are needed for general CG.");
-            public static readonly GUIContent basicColorFoldout = EditorGUIUtility.TrTextContent("Three Color and Control Map Settings", "Three Color Map and Control Map Settings provide very basic settings for cel-shading in Unity Toon Shader.");
-            public static readonly GUIContent shadingStepAndFeatherFoldout = EditorGUIUtility.TrTextContent("Shading Step and Feather Settings", "Basic 3 color step and feather settings.");
-            public static readonly GUIContent normalMapFoldout = EditorGUIUtility.TrTextContent("Normal Map Settings", "Normal Map settings. Normal Map itself and its effectiveness to some areas.");
-            public static readonly GUIContent highlightFoldout = EditorGUIUtility.TrTextContent("Highlight Settings", "Highlight  settings. Such as power, show or hide, light shape and so on.");
-            public static readonly GUIContent rimLightFoldout = EditorGUIUtility.TrTextContent("Rim Light Settings", "Rim Light Settings. Such as color, direction, inverted rim light and so on.");
-            public static readonly GUIContent matCapFoldout = EditorGUIUtility.TrTextContent("Material Capture (MatCap) Settings", "MatCap settings. Sphere maps for metallic or unusual expressions.");
-            public static readonly GUIContent angelRingFoldout = EditorGUIUtility.TrTextContent("Angel Ring Projection Settings", "Angel ring projection settings. A kind of specular specialized for hairs.");
-            public static readonly GUIContent emissionFoldout = EditorGUIUtility.TrTextContent("Emission Settings", "Emission settings. Textures, animations and so on.");
-            public static readonly GUIContent outlineFoldout = EditorGUIUtility.TrTextContent("Outline Settings", "Outline settings. Such as width, colors and so on.");
-            public static readonly GUIContent tessellationFoldout = EditorGUIUtility.TrTextContent("Tessellation Settings", "Tessellation settings for DX11, DX12 and Mac  Metal.");
-            public static readonly GUIContent maskRenderingFoldout = EditorGUIUtility.TrTextContent("Mask Rendering Settings", "Mask rendering setting, controlled by Visual Compositor.");
-            public static readonly GUIContent lightEffectivenessFoldout = EditorGUIUtility.TrTextContent("Scene Light Effectiveness Settings", "Scene light effectiveness to each parameter.");
+            public static readonly GUIContent shaderFoldout = EditorGUIUtility.TrTextContent("着色器设置", "着色器设置提供了一些基本设置，不仅限于卡通渲染，而是为一般的计算机图形学所需。");
+            public static readonly GUIContent basicColorFoldout = EditorGUIUtility.TrTextContent("三色和控制图设置", "三色图和控制图设置为Unity Toon Shader的卡通渲染提供了非常基本的设置。");
+            public static readonly GUIContent shadingStepAndFeatherFoldout = EditorGUIUtility.TrTextContent("阴影步骤和羽化设置", "基本的三色阴影步骤和羽化设置。");
+            public static readonly GUIContent normalMapFoldout = EditorGUIUtility.TrTextContent("法线贴图设置", "法线贴图设置。法线贴图本身以及其对某些区域的影响。");
+            public static readonly GUIContent highlightFoldout = EditorGUIUtility.TrTextContent("高光设置", "高光设置。如功率、显示或隐藏、光形状等。");
+            public static readonly GUIContent rimLightFoldout = EditorGUIUtility.TrTextContent("边缘光设置", "边缘光设置。如颜色、方向、反向边缘光等。");
+            public static readonly GUIContent matCapFoldout = EditorGUIUtility.TrTextContent("材质捕捉（MatCap）设置", "MatCap设置。用于金属或不寻常效果的球面贴图。");
+            public static readonly GUIContent angelRingFoldout = EditorGUIUtility.TrTextContent("天使光环投影设置", "天使光环投影设置。一种专门用于头发的高光效果。");
+            public static readonly GUIContent emissionFoldout = EditorGUIUtility.TrTextContent("发光设置", "发光设置。纹理、动画等。");
+            public static readonly GUIContent outlineFoldout = EditorGUIUtility.TrTextContent("轮廓设置", "轮廓设置。如宽度、颜色等。");
+            public static readonly GUIContent tessellationFoldout = EditorGUIUtility.TrTextContent("镶嵌设置", "DX11、DX12和Mac Metal的镶嵌设置。");
+            public static readonly GUIContent maskRenderingFoldout = EditorGUIUtility.TrTextContent("遮罩渲染设置", "由可视合成器控制的遮罩渲染设置。");
+            public static readonly GUIContent lightEffectivenessFoldout = EditorGUIUtility.TrTextContent("场景光照效果设置", "对每个参数的场景光照效果。");
 
-            public static readonly GUIContent metaverseSettingsFoldout = EditorGUIUtility.TrTextContent("Metaverse Settings (Experimental)", "Default directional light when no directional lights are in the scene.");
-            public static readonly GUIContent shadowControlMapFoldout = EditorGUIUtility.TrTextContent("Shadow Control Maps", "Shadow control map settings. Such as positions and highlight filtering.");
-            public static readonly GUIContent pointLightFoldout = EditorGUIUtility.TrTextContent("Point Light Settings", "Point light settings. Such as filtering and step offset.");
+            public static readonly GUIContent metaverseSettingsFoldout = EditorGUIUtility.TrTextContent("Metaverse设置（实验性）", "当场景中没有方向光时的默认方向光。");
+            public static readonly GUIContent shadowControlMapFoldout = EditorGUIUtility.TrTextContent("阴影控制图设置", "阴影控制图设置。如位置和高光滤波。");
+            public static readonly GUIContent pointLightFoldout = EditorGUIUtility.TrTextContent("点光源设置", "点光源设置。如滤波和步进偏移。");
 
-            public static readonly GUIContent baseColorText = new GUIContent("Base Map", "Base Color : Texture(sRGB) × Color(RGB) Default:White");
-            public static readonly GUIContent firstShadeColorText = new GUIContent("1st Shading Map", "The map used for the brighter portions of the shadow.");
-            public static readonly GUIContent secondShadeColorText = new GUIContent("2nd Shading Map", "The map used for the darker portions of the shadow.");
-            public static readonly GUIContent normalMapText = new GUIContent("Normal Map", "A texture that dictates the bumpiness of the material.");
-            public static readonly GUIContent highColorText = new GUIContent("Highlight", "Highlight : Texture(sRGB) × Color(RGB) Default:White");
-            public static readonly GUIContent highColorMaskText = new GUIContent("Highlight Mask", "A grayscale texture which utilises its brightness to control intensity.");
-            public static readonly GUIContent rimLightMaskText = new GUIContent("Rim Light Mask", "Rim Light Mask : Texture(linear). The white part of the texture is displayed as Rim Light, and the black part is masked and not displayed.");
-            public static readonly GUIContent matCapSamplerText = new GUIContent("MatCap Map", "MatCap Color : Texture(sRGB) × Color(RGB) Default:White");
-            public static readonly GUIContent matCapMaskText = new GUIContent("MatCap Mask", "The MatCap mask is positioned with respect to the UV coordinates of the mesh onto which the MatCap is projected, and the pixels on black areas are hidden.");
-            public static readonly GUIContent angelRingText = new GUIContent("Angel Ring", "Angel Ring : Texture(sRGB) × Color(RGB) Default:Black.");
-            public static readonly GUIContent emissiveTexText = new GUIContent("Emission Map", "Primarily used with the Bloom Post Effect, Luminous objects can be represented.");
-            public static readonly GUIContent shadingGradeMapText = new GUIContent("Shading Grade Map", "Specify shadow-prone areas in UV coordinates. Shading Grade Map : Texture(linear)");
-            public static readonly GUIContent firstPositionMapText = new GUIContent("1st Shading Position Map", "Specify the position of fixed shadows that falls in 1st shade color areas in UV coordinates. 1st Position Map : Texture(linear)");
-            public static readonly GUIContent secondPositionMapText = new GUIContent("2nd Shading Position Map", "Specify the position of fixed shadows that falls in 2nd shade color areas in UV coordinates. 2nd Position Map : Texture(linear)");
-            public static readonly GUIContent outlineSamplerText = new GUIContent("Outline Width Map", "Outline Width Map as Grayscale Texture : Texture(linear). In the case of white, the Outline Width is displayed as it is. In black, the width is 0.");
-            public static readonly GUIContent outlineTexText = new GUIContent("Outline Color Map", "Outline texture : Texture(sRGB) Default:White");
-            public static readonly GUIContent bakedNormalOutlineText = new GUIContent("Baked Normal Map for Outline", "Unpacked Normal Map : Texture(linear) .Note that this is not a standard NORMAL MAP.");
-            public static readonly GUIContent clippingMaskText = new GUIContent("Clipping Mask", "A grayscale texture which utilises its brightness to control transparency.");
+            public static readonly GUIContent baseColorText = new GUIContent("基础贴图", "基础颜色：纹理（sRGB）×颜色（RGB） 默认：白色");
+            public static readonly GUIContent firstShadeColorText = new GUIContent("第一阴影贴图", "用于阴影较亮部分的贴图。");
+            public static readonly GUIContent secondShadeColorText = new GUIContent("第二阴影贴图", "用于阴影较暗部分的贴图。");
+            public static readonly GUIContent normalMapText = new GUIContent("法线贴图", "规定材质凹凸程度的纹理。");
+            public static readonly GUIContent highColorText = new GUIContent("高光", "高光：纹理（sRGB）×颜色（RGB） 默认：白色");
+            public static readonly GUIContent highColorMaskText = new GUIContent("高光蒙版", "灰度纹理，利用其亮度来控制强度。");
+            public static readonly GUIContent rimLightMaskText = new GUIContent("边缘光蒙版", "边缘光蒙版：纹理（线性）。纹理的白色部分显示为边缘光，黑色部分被掩蔽不显示。");
+            public static readonly GUIContent matCapSamplerText = new GUIContent("MatCap贴图", "MatCap颜色：纹理（sRGB）×颜色（RGB） 默认：白色");
+            public static readonly GUIContent matCapMaskText = new GUIContent("MatCap蒙版", "MatCap蒙版相对于MatCap投影到的网格的UV坐标定位，黑色区域的像素被隐藏。");
+            public static readonly GUIContent angelRingText = new GUIContent("天使光环", "天使光环：纹理（sRGB）×颜色（RGB） 默认：黑色。");
+            public static readonly GUIContent emissiveTexText = new GUIContent("发光贴图", "主要与泛光后期效果一起使用，可以表示发光的物体。");
+            public static readonly GUIContent shadingGradeMapText = new GUIContent("阴影等级贴图", "在UV坐标中指定容易产生阴影的区域。阴影等级贴图：纹理（线性）");
+            public static readonly GUIContent firstPositionMapText = new GUIContent("第一阴影位置贴图", "在UV坐标中指定位于第一阴影颜色区域中的固定阴影的位置。第一位置贴图：纹理（线性）");
+            public static readonly GUIContent secondPositionMapText = new GUIContent("第二阴影位置贴图", "在UV坐标中指定位于第二阴影颜色区域中的固定阴影的位置。第二位置贴图：纹理（线性）");
+            public static readonly GUIContent outlineSamplerText = new GUIContent("轮廓宽度贴图", "灰度纹理的轮廓宽度贴图：纹理（线性）。在白色情况下，轮廓宽度按原样显示。在黑色情况下，宽度为0。");
+            public static readonly GUIContent outlineTexText = new GUIContent("轮廓颜色贴图", "轮廓纹理：纹理（sRGB） 默认：白色");
+            public static readonly GUIContent bakedNormalOutlineText = new GUIContent("轮廓烘焙法线贴图", "未打包的法线贴图：纹理（线性）。请注意，这不是标准的法线贴图。");
+            public static readonly GUIContent clippingMaskText = new GUIContent("剪切蒙版", "灰度纹理，利用其亮度来控制透明度。");
 
-            public static readonly GUIContent specularModeText = new GUIContent("Specular Mode", "Specular light mode. Hard or Soft.");
-            public static readonly GUIContent specularBlendModeText = new GUIContent("Color Blending Mode", "Specular color blending mode. Multiply or Add.");
-            public static readonly GUIContent matcapBlendModeText = new GUIContent("Color Blending Mode", "MatCap color blending mode. Multiply or Add.");
-            public static readonly GUIContent matcapOrthoText = new GUIContent("MatCap Camera Mode", "Control how the MatCap Map is rendered based on the type of camera.");
-            public static readonly GUIContent transparentModeText = new GUIContent("Transparency", "Enable different modes that allow the simulation of a variety of transparent objects. ");
-            public static readonly GUIContent stencilVauleText = new GUIContent("Stencil Value", "Stencil value that is submitted to the stencil buffer for controlling the per-pixel drawing.");
-            public static readonly GUIContent workflowModeText = new GUIContent("Mode", "The UTS mode that controls what settings are exposed in the shader.");
+            public static readonly GUIContent specularModeText = new GUIContent("高光模式", "高光光照模式。硬或软。");
+            public static readonly GUIContent specularBlendModeText = new GUIContent("颜色混合模式", "高光颜色混合模式。相乘或相加。");
+            public static readonly GUIContent matcapBlendModeText = new GUIContent("颜色混合模式", "MatCap颜色混合模式。相乘或相加。");
+            public static readonly GUIContent matcapOrthoText = new GUIContent("MatCap相机模式", "根据相机类型控制MatCap贴图的渲染方式。");
+            public static readonly GUIContent transparentModeText = new GUIContent("透明度", "启用不同的模式，以模拟各种透明物体。");
+            public static readonly GUIContent stencilVauleText = new GUIContent("模板值", "提交给模板缓冲区以控制每个像素的绘制。");
+            public static readonly GUIContent workflowModeText = new GUIContent("模式", "控制在着色器中公开了哪些设置的UTS模式。");
 
             // -----------------------------------------------------
-            public static readonly GUIContent clippingmodeModeText0 = new GUIContent("Clipping","Allow for the use of a texture to control the transparency of the shader.");
-            public static readonly GUIContent clippingmodeModeText1 = new GUIContent("Trans Clipping", "Select trans clipping mode that fits your purpose. ");
-            public static readonly GUIContent stencilmodeModeText = new GUIContent("Stencil", "Control the stencil buffer which manipulates pixel drawing.");
-            public static readonly GUIContent cullingModeText = new GUIContent("Culling Mode", "Controls the sides of polygons that should not be drawn (culled).");
+            public static readonly GUIContent clippingmodeModeText0 = new GUIContent("剪切", "允许使用纹理控制着色器的透明度。");
+            public static readonly GUIContent clippingmodeModeText1 = new GUIContent("透明剪切", "选择适合您目的的透明剪切模式。");
+            public static readonly GUIContent stencilmodeModeText = new GUIContent("模板", "控制操纵像素绘制的模板缓冲区。");
+            public static readonly GUIContent cullingModeText = new GUIContent("剔除模式", "控制不应绘制（剔除）的多边形的侧面。");
 
-            // ----------------------------------------------------- for GUI Toggles
-            public static readonly GUIContent autoRenderQueueText = new GUIContent("Auto Render Queue", "When enabled, rendering order is determined by system automatically.");
-            public static readonly GUIContent renderQueueText = new GUIContent("Render Queue", "Rendering order in the scene.");
-            public static readonly GUIContent invertClippingMaskText = new GUIContent("Invert Clipping Mask", "Invert clipping mask results.");
-            public static readonly GUIContent baseMapAlphaAsClippingMask = new GUIContent("Use Base Map Alpha as Clipping Mask", "Use Base Map Alpha as Clipping Mask instead of Clipping mask texture.");
-            public static readonly GUIContent applyTo1stShademapText = new GUIContent("Apply to 1st shading map", "Apply Base map to the 1st shading map.");
-            public static readonly GUIContent applyTo2ndShademapText = new GUIContent("Apply to 2nd shading map", "Apply Base map or the 1st shading map to the 2st shading map.");
-            public static readonly GUIContent threeBasicColorToNormalmapText = new GUIContent("Three Basic Colors", "Normal map effectiveness to Three Basic color areas, lit, the 1st shading and the 2nd.");
-            public static readonly GUIContent highLightToNormalmapText = new GUIContent("Highlight", "Normal map effectiveness to high lit areas.");
-            public static readonly GUIContent rimlightToNormalmapText = new GUIContent("Rim Light", "Normal map effectiveness to rim lit areas.");
-            public static readonly GUIContent receiveShadowText = new GUIContent("Receive Shadows", "Determine if the material reflects shadows.");
-            public static readonly GUIContent filterPointLightText = new GUIContent("Filter Point Light Highlights", "Show or hide highlight of point lights.");
-            public static readonly GUIContent highlightOnShadowText = new GUIContent("Highlight Blending on Shadows", "Control the blending for the highlights in shadows.");
-            public static readonly GUIContent lightColorEffectiveness = EditorGUIUtility.TrTextContent("Light Color Effectiveness", "light color effectiveness to each parameter.");
+            // ----------------------------------------------------- 用于GUI开关
+            public static readonly GUIContent autoRenderQueueText = new GUIContent("自动渲染队列", "启用时，渲染顺序由系统自动确定。");
+            public static readonly GUIContent renderQueueText = new GUIContent("渲染队列", "场景中的渲染顺序。");
+            public static readonly GUIContent invertClippingMaskText = new GUIContent("反转剪切蒙版", "反转剪切蒙版的结果。");
+            public static readonly GUIContent baseMapAlphaAsClippingMask = new GUIContent("使用基础贴图Alpha作为剪切蒙版", "使用基础贴图Alpha作为剪切蒙版，而不是剪切蒙版纹理。");
+            public static readonly GUIContent applyTo1stShademapText = new GUIContent("应用于第一阴影贴图", "将基础贴图应用于第一阴影贴图。");
+            public static readonly GUIContent applyTo2ndShademapText = new GUIContent("应用于第二阴影贴图", "将基础贴图或第一阴影贴图应用于第二阴影贴图。");
+            public static readonly GUIContent threeBasicColorToNormalmapText = new GUIContent("三种基本颜色", "法线贴图对三种基本颜色区域，高光，第一阴影和第二阴影的影响。");
+            public static readonly GUIContent highLightToNormalmapText = new GUIContent("高光", "法线贴图对高光区域的影响。");
+            public static readonly GUIContent rimlightToNormalmapText = new GUIContent("边缘光", "法线贴图对边缘光区域的影响。");
+            public static readonly GUIContent receiveShadowText = new GUIContent("接收阴影", "确定材质是否反射阴影。");
+            public static readonly GUIContent filterPointLightText = new GUIContent("过滤点光源高光", "显示或隐藏点光源的高光。");
+            public static readonly GUIContent highlightOnShadowText = new GUIContent("阴影中的高光混合", "控制阴影中高光的混合。");
+            public static readonly GUIContent lightColorEffectiveness = EditorGUIUtility.TrTextContent("光色效果", "每个参数的光色效果。");
 
-            public static readonly GUIContent lightColorEffectivinessToBaseColorText  = new GUIContent("Base Color", "Light color effect the base color areas.");
-            public static readonly GUIContent lightColorEffectivinessTo1stShadingText = new GUIContent("1st Shading Color", "Light color effect in the 1st shading color areas.");
-            public static readonly GUIContent lightColorEffectivinessTo2ndShadingText = new GUIContent("2nd Shading Color", "Light color effect in the 2nd shading color areas.");
-            public static readonly GUIContent lightColorEffectivinessToHighlitText    = new GUIContent("Highlight", "Light color effect in high lit areas.");
-            public static readonly GUIContent lightColorEffectivinessToRimlitText     = new GUIContent("Rim Light", "Light color effect in rim lit areas.");
-            public static readonly GUIContent lightColorEffectivinessToInvRimlitText  = new GUIContent("Inverted Light Direciton Rim Light", "Light color effect in inverted direction rim lit areas.");
-            public static readonly GUIContent lightColorEffectivinessToMatCapText = new GUIContent("MatCap", "Light color effect in MatCap areas.");
-            public static readonly GUIContent lightColorEffectivenessToAngelRingText = new GUIContent("Angel Ring", "Light color effect in angel ring area. Angel Ring is only available in With Additional Control Maps mode.");
-            public static readonly GUIContent lightColorEffectivinessToOutlineText = new GUIContent("Outline", "Light color effect in outlines.");
-            public static readonly GUIContent rimlightText = new GUIContent("Rim Light", "A light that hits the 3D model from behind and emphasizes the contours of the model from the front.");
-            public static readonly GUIContent rimlightFeatherText = new GUIContent("Rim Light Feather Off", "Disable Rim light feather.");
-            public static readonly GUIContent rimlightDirectionMaskText = new GUIContent("Light Direction", "When Enabled, rim light is generated only in the direction of the light source.");
-            public static readonly GUIContent invertedRimlightText = new GUIContent("Inverted Direciton Rim Light", "Rim light from inverted/antipodean direction.");
-            public static readonly GUIContent camearRollingStabilizerText = new GUIContent("Stabilize Camera rolling", "Stabilize Camera rolling when capturing materials with camera.");
-            public static readonly GUIContent invertedRimlightFeatherText = new GUIContent("Inverted Rim Light Feather Off", "Disable Inverted Rim light feather.");
-            public static readonly GUIContent matCapText = new GUIContent("MatCap", "Enable/Disable MatCap (Material Capture)");
-            public static readonly GUIContent matCapNormalmapSpecularaMask = new GUIContent("Normal Map Specular Mask for MatCap", "If Enabled, gives a normal map specifically for MatCap.If you are using MatCap as speculum lighting, you can use this to mask it.");
-            public static readonly GUIContent matCapOnShadow = new GUIContent("MatCap Blending on Shadows", "Enables the blending rate of the MatCap range in shadows.");
-            public static readonly GUIContent invertMatCapMaskText = new GUIContent("Invert MatCap Mask","When enabled, MatCap Mask Texture is inverted.");
+            public static readonly GUIContent lightColorEffectivinessToBaseColorText  = new GUIContent("基础颜色", "光的颜色对基础颜色区域的影响。");
+            public static readonly GUIContent lightColorEffectivinessTo1stShadingText = new GUIContent("第一层阴影颜色", "光的颜色对第一层阴影颜色区域的影响。");
+            public static readonly GUIContent lightColorEffectivinessTo2ndShadingText = new GUIContent("第二层阴影颜色", "光的颜色对第二层阴影颜色区域的影响。");
+            public static readonly GUIContent lightColorEffectivinessToHighlitText    = new GUIContent("高光", "光的颜色对高光区域的影响。");
+            public static readonly GUIContent lightColorEffectivinessToRimlitText     = new GUIContent("边缘光", "光的颜色对边缘光区域的影响。");
+            public static readonly GUIContent lightColorEffectivinessToInvRimlitText  = new GUIContent("反向边缘光", "光的颜色对反向边缘光区域的影响。");
+            public static readonly GUIContent lightColorEffectivinessToMatCapText = new GUIContent("MatCap", "光的颜色对MatCap区域的影响。");
+            public static readonly GUIContent lightColorEffectivenessToAngelRingText = new GUIContent("天使光环", "光的颜色对天使光环区域的影响。天使光环仅在使用附加控制贴图模式时可用。");
+            public static readonly GUIContent lightColorEffectivinessToOutlineText = new GUIContent("轮廓", "光的颜色对轮廓区域的影响。");
+            public static readonly GUIContent rimlightText = new GUIContent("边缘光", "从模型背后照射并强调模型前部轮廓的光线。");
+            public static readonly GUIContent rimlightFeatherText = new GUIContent("边缘光羽化关闭", "禁用边缘光羽化。");
+            public static readonly GUIContent rimlightDirectionMaskText = new GUIContent("光的方向", "启用时，仅在光源方向上生成边缘光。");
+            public static readonly GUIContent invertedRimlightText = new GUIContent("反向边缘光", "从反向/对脚方向产生的边缘光。");
+            public static readonly GUIContent camearRollingStabilizerText = new GUIContent("稳定相机滚动", "捕捉相机材质时稳定相机滚动。");
+            public static readonly GUIContent invertedRimlightFeatherText = new GUIContent("反向边缘光羽化关闭", "禁用反向边缘光羽化。");
+            public static readonly GUIContent matCapText = new GUIContent("MatCap", "启用/禁用MatCap（材质捕捉）。");
+            public static readonly GUIContent matCapNormalmapSpecularaMask = new GUIContent("MatCap的法线贴图镜面遮罩", "如果启用，专门为MatCap提供法线贴图。如果您将MatCap用作镜面照明，可以使用此选项进行遮罩。");
+            public static readonly GUIContent matCapOnShadow = new GUIContent("阴影上的MatCap混合", "启用阴影中MatCap范围的混合速率。");
+            public static readonly GUIContent invertMatCapMaskText = new GUIContent("反向MatCap蒙版", "启用时，反向MatCap蒙版纹理。");
 
-            public static readonly GUIContent angelRingProjectionText = new GUIContent("Angel Ring Projection", "Enable the Angel Ring effect for UTS, which is used to express shine or luster in hair.");
-            public static readonly GUIContent angelRingAlphaAdClippingMaskText = new GUIContent("Alpha Channel as Clipping Mask", "Texture alpha channel is used for clipping mask. If disabled, alpha does not affect at all.");
-            public static readonly GUIContent pingpongMoveText = new GUIContent("Ping-pong moves for base", "When enabled, you can set PingPong (back and forth) in the direction of the animation.");
-            public static readonly GUIContent colorShitWithTimeText = new GUIContent("Color Shifting with Time", "The color that is multiplied by the Emissive texture is changed by linear interpolation (Lerp) toward the Destination Color.");
-            public static readonly GUIContent blendBaseColorToOutlineText = new GUIContent("Color Shifting with View Angle", "Emissive color shifts in accordance with view angle.");
-            public static readonly GUIContent colorShiftWithViewAngle = new GUIContent("Color Shifting with View Angle", "Emissive color shifts in accordance with view angle.");
-            public static readonly GUIContent baseColorToOtulineText = new GUIContent("Blend Base Color to Outline","Base Color is blended into outline color.");
-            public static readonly GUIContent outlineColorMapText = new GUIContent("Outline Color Map", "Apply a texture as outline color map.");
-            public static readonly GUIContent bakedNormalForOutlineText = new GUIContent("Baked Normal Map", "Normal maps with vertex normals previously baked in from other models can be loaded as an addition when setting up normal inversion outlines.");
-            public static readonly GUIContent metaverseLightText = new GUIContent("Metaverse Light", "Enables the use of UTS to work appropriately without any directional lights in the scene.");
-            public static readonly GUIContent metaverseLightDirectionText = new GUIContent("Metaverse Light Direction", "Control the direction of the supplementary lighting for UTS in the scene.");
-            public static readonly GUIContent invertZaxisDirection = new GUIContent("Invert Z-Axis Direction", "Invert Metaverse light Z-Axis Direction.");
-            public static readonly GUIContent emissiveScrollAnimationModeText = new GUIContent("Animation Mode", "Controls the animated scrolling of the emissive texture.");
-            public static readonly GUIContent emissionAnimationText = new GUIContent("Emission Map Animation", "When Enabled, the UV and Color of the Emission Map are animated.");
-            public static readonly GUIContent outlineModeText = new GUIContent("Outline Mode", "Specifies how the inverted-outline object is spawned.");
-            public static readonly GUIContent limitLightIntensityText = new GUIContent("Limit Light Intensity", "Limit the brightness of the light to 1 to avoid white-out.");
+            public static readonly GUIContent angelRingProjectionText = new GUIContent("天使光环投影", "为UTS启用天使光环效果，用于表现头发的光泽或光泽。");
+            public static readonly GUIContent angelRingAlphaAdClippingMaskText = new GUIContent("Alpha通道作为裁剪蒙版", "使用纹理alpha通道作为裁剪蒙版。如果禁用，则alpha不会起作用。");
+            public static readonly GUIContent pingpongMoveText = new GUIContent("基础的Ping-pong运动", "启用时，可以在动画方向上设置PingPong（前后摆动）。");
+            public static readonly GUIContent colorShitWithTimeText = new GUIContent("随时间变化的颜色", "通过线性插值（Lerp）向目标颜色变化的Emissive纹理的颜色。");
+            public static readonly GUIContent blendBaseColorToOutlineText = new GUIContent("视角变化的颜色变化", "发射颜色随视角变化而变化。");
+            public static readonly GUIContent colorShiftWithViewAngle = new GUIContent("视角变化的颜色变化", "发射颜色随视角变化而变化。");
+            public static readonly GUIContent baseColorToOtulineText = new GUIContent("将基础颜色混合到轮廓中", "将基础颜色混合到轮廓颜色中。");
+            public static readonly GUIContent outlineColorMapText = new GUIContent("轮廓颜色映射", "将纹理应用为轮廓颜色映射。");
+            public static readonly GUIContent bakedNormalForOutlineText = new GUIContent("轮廓的烘焙法线贴图", "使用从其他模型先前烘焙的顶点法线的法线贴图时，可以作为设置法线反演轮廓时的附加载入。");
+            public static readonly GUIContent metaverseLightText = new GUIContent("Metaverse灯光", "启用UTS，使其在场景中没有定向光的情况下正常工作。");
+            public static readonly GUIContent metaverseLightDirectionText = new GUIContent("Metaverse灯光方向", "控制场景中UTS的辅助照明方向。");
+            public static readonly GUIContent invertZaxisDirection = new GUIContent("反向Z轴方向", "反向Metaverse灯光Z轴方向。");
+            public static readonly GUIContent emissiveScrollAnimationModeText = new GUIContent("动画模式", "控制Emissive纹理的动画滚动。");
+            public static readonly GUIContent emissionAnimationText = new GUIContent("发射贴图动画", "启用时，Emission贴图的UV和颜色会发生动画变化。");
+            public static readonly GUIContent outlineModeText = new GUIContent("轮廓模式", "指定反向轮廓对象如何生成。");
+            public static readonly GUIContent limitLightIntensityText = new GUIContent("限制光照强度", "限制光的亮度为1，以避免白色过曝。");
+
             // Range properties
-            public static readonly RangeProperty metaverseRangePropText = new RangeProperty(
-                label: "Metaverse Light Intensity", 
-                tooltip: "Control the intensity of the supplementary lighting for UTS in the scene.",
+public static readonly RangeProperty metaverseRangePropText = new RangeProperty(
+                label: "元宇宙光强度", 
+                tooltip: "控制场景中UTS补充照明的强度。",
                 propName: ShaderPropUnlit_Intensity,  defaultValue: 0, min: 0.0f, max: 4.0f);
             public static readonly RangeProperty metaverseOffsettXaxisText = new RangeProperty(
-                label: "Offset X-Axis Direction", tooltip: "Moves  Metaverse light horizontally.",
+                label: "X轴方向偏移", tooltip: "水平移动元宇宙光。",
                 propName: "_Offset_X_Axis_BLD", defaultValue: -0.05f, min: -1.0f,max:1.0f);
             public static readonly RangeProperty metaverseOffsettYaxisText = new RangeProperty(
-                label: "Offset Y-Axis Direction", tooltip: "Moves  Metaverse light vertically.",
+                label: "Y轴方向偏移", tooltip: "垂直移动元宇宙光。",
                 propName: "_Offset_Y_Axis_BLD", defaultValue: -0.05f, min: -1.0f, max: 1.0f);
             public static readonly RangeProperty tweakTransParencyText = new RangeProperty(
-                label: "Transparency Level", tooltip: "Adjusts the transparency by considering the grayscale level of the clipping mask as an alpha value.",
+                label: "透明度级别", tooltip: "通过考虑裁剪蒙版的灰度级别作为Alpha值来调整透明度。",
                 propName: "_Tweak_transparency", defaultValue:0.0f, min: -1.0f, max:1.0f);
             public static readonly RangeProperty clippingLevelText = new RangeProperty(
-                label: "Clipping Level", tooltip: "Specifies the strength of the clipping mask.",
+                label: "裁剪级别", tooltip: "指定裁剪蒙版的强度。",
                 propName: "_Clipping_Level", defaultValue: 0.0f,min: 0.0f, max: 1.0f);
             public static readonly RangeProperty scrollEmissiveUText = new RangeProperty(
-                label: "Scroll U/X direction", tooltip: "Specifies how much the Emissive texture should scroll in the u-direction (x-axis direction) when updating the animation. The scrolling animation is ultimately determined by Base Speed (Time) x Scroll U Direction x Scroll V Direction.",
+                label: "滚动 U/X 方向", tooltip: "指定 Emissive 纹理在 u 方向（x 轴方向）更新动画时应滚动的程度。滚动动画最终由基础速度（时间）x 滚动 U 方向 x 滚动 V 方向确定。",
                 propName: "_Scroll_EmissiveU", defaultValue: 0.0f, min: -1.0f, max: 1.0f);
             public static readonly RangeProperty scrollEmissiveVText = new RangeProperty(
-                label: "Scroll V/Y direction", tooltip: "Specifies how much the Emissive texture should scroll in the u-direction (y-axis direction) when updating the animation. The scrolling animation is ultimately determined by Base Speed (Time) x Scroll U Direction x Scroll V Direction.",
+                label: "滚动 V/Y 方向", tooltip: "指定 Emissive 纹理在 u 方向（y 轴方向）更新动画时应滚动的程度。滚动动画最终由基础速度（时间）x 滚动 U 方向 x 滚动 V 方向确定。",
                 propName: "_Scroll_EmissiveV", defaultValue: 0.0f, min: -1.0f, max: 1.0f);
             public static readonly RangeProperty tweakHighColorOnShadowText = new RangeProperty(
-                label: "Blending Level", tooltip: "Adjusts the intensity of highlight applied to shadow areas.",
+                label: "混合级别", tooltip: "调整应用于阴影区域的高光的强度。",
                 propName: "_TweakHighColorOnShadow", defaultValue: 0.0f, min: 0, max: 1);
             public static readonly RangeProperty tweakMatCapOnShadowText = new RangeProperty(
-                label: "Blending Level", tooltip: "Adjusts the intensity of MatCap applied to shadow areas.",
+                label: "混合级别", tooltip: "调整应用于阴影区域的 MatCap 的强度。",
                 propName: "_TweakMatCapOnShadow", defaultValue: 0.0f, min: 0, max: 1);
             public static readonly RangeProperty tweakSystemShadowLevelText = new RangeProperty(
-                label: "System Shadow Level", tooltip: "Define the appearance of self-shadows and other received shadows that blend with the toon shader.",
+                label: "系统阴影级别", tooltip: "定义与卡通着色器混合的自身阴影和其他接收到的阴影的外观。",
                 propName: "_Tweak_SystemShadowsLevel", defaultValue: 0.0f, min: -0.5f, max: 0.5f);
 
             public static readonly RangeProperty shaderPropBaseColorText = new RangeProperty(
-                label: "Base Color Step", tooltip: "Sets the boundary between the Base Color and the Shade Colors.",
+                label: "基础颜色步进", tooltip: "设置基础颜色和阴影颜色之间的边界。",
                 propName: ShaderPropBaseColor_Step, defaultValue: 0.5f, min: 0, max: 1 );
             public static readonly RangeProperty shaderPropBaseFeatherText = new RangeProperty(
-                label: "Base Shading Feather", tooltip: "Feathers the boundary between the Base Color and the Shade Colors..",
+                label: "基础遮蔽羽化", tooltip: "羽化基础颜色和阴影颜色之间的边界。",
                 propName: ShaderPropBaseShade_Feather, defaultValue: 0.0001f, min: 0.0001f, max: 1);
             public static readonly RangeProperty shaderPropShadeColorStepText = new RangeProperty(
-                label: "Shading Color Step", tooltip: "Sets the boundary between the 1st and 2nd Shade Colors. Set this to 0 if no 2nd Shade Color is used.",
+                label: "阴影颜色步进", tooltip: "设置第1和第2阴影颜色之间的边界。如果不使用第2阴影颜色，则将其设置为0。",
                 propName: ShaderPropShadeColor_Step, defaultValue: 0, min: 0, max: 1);
             public static readonly RangeProperty shaderProp1st2nd_Shades_FeatherText = new RangeProperty(
-                label: "1st/2nd Shading Feather", tooltip: "Feathers the boundary between the 1st and 2nd Shade Colors.",
+                label: "第1/2阴影羽化", tooltip: "羽化第1和第2阴影颜色之间的边界。",
                 propName: ShaderProp1st2nd_Shades_Feather,defaultValue: 0.0001f, min: 0.0001f, max: 1);
 
             public static readonly RangeProperty shaderProp1st_ShadeColor_StepText = new RangeProperty(
-                label: "1st Shade Color Step", tooltip: "Sets the step between the Base color and 1st Shade Color, the same as the BaseColor_Step property..",
+                label: "第1阴影颜色步进", tooltip: "设置基色和第1阴影颜色之间的步进，与 BaseColor_Step 属性相同。",
                 propName: ShaderProp1st_ShadeColor_Step, defaultValue: 0.5f, min: 0, max: 1);
             public static readonly RangeProperty shaderProp1st_ShadeColor_FeatherText = new RangeProperty(
-                label: "1st Shade Color Feather", tooltip: "Feathers the boundary between the Base Color and the 1st Shade Color, the same as the Base/Shade_Feather property.",
+                label: "第1阴影颜色羽化", tooltip: "羽化基础颜色和第1阴影颜色之间的边界，与 Base/Shade_Feather 属性相同。",
                 propName: ShaderProp1st_ShadeColor_Feather,defaultValue: 0.0001f, min: 0.0001f, max: 1);
             public static readonly RangeProperty shaderProp2nd_ShadeColor_StepText = new RangeProperty(
-                label: "2nd Shade Color Step", tooltip: "Sets the step between the 1st and 2nd Shade Colors, the same as the ShadeColor_Step property.",
+                label: "第2阴影颜色步进", tooltip: "设置第1和第2阴影颜色之间的步进，与 ShadeColor_Step 属性相同。",
                 propName: ShaderProp2nd_ShadeColor_Step, defaultValue: 0, min: 0, max: 1);
             public static readonly RangeProperty shaderProp2nd_ShadeColor_FeatherText = new RangeProperty(
-                label: "2nd Shade Color Feather", tooltip: "Feathers the boundary between the 1st and 2nd Shade Colors, the same as the 1st/2nd_Shades_Feather properties.",
+                label: "第2阴影颜色羽化", tooltip: "羽化第1和第2阴影颜色之间的边界，与 1st/2nd_Shades_Feather 属性相同。",
                 propName: ShaderProp2nd_ShadeColor_Feather, defaultValue: 0.0001f, min: 0.0001f, max: 1);
 
             public static readonly RangeProperty shaderPropStepOffsetText = new RangeProperty(
-                label: "Step Offset", tooltip: "Fine tunes light steps (boundaries) added in the ForwardAdd pass, such as real-time point lights.",
+                label: "步进偏移", tooltip: "微调在 ForwardAdd 通道中添加的光步（边界），例如实时点光源。",
                 propName: "_StepOffset", defaultValue:0, min: -0.5f, max: 0.5f);
             public static readonly RangeProperty shaderPropHilightPowerText = new RangeProperty(
-                label: "Highlight Power", tooltip: "Highlight power factor, pow(x,5) is used inside the shader.",
+                label: "高光强度", tooltip: "高光功率因子，着色器内部使用 pow(x,5)。",
                 propName: "_HighColor_Power", defaultValue: 0, min: 0, max: 1);
 
             public static readonly RangeProperty hilightMaskLevelText = new RangeProperty(
-                label: "Highlight Mask Level", tooltip: "Highlight mask texture blending level to highlights.",
+                label: "高光蒙版级别", tooltip: "高光蒙版纹理混合到高光的级别。",
                 propName: "_Tweak_HighColorMaskLevel", defaultValue: 0, min: -1, max: 1);
 
             public static readonly RangeProperty shadingGradeMapLevelText = new RangeProperty(
-                label: "ShadingGradeMap Level", tooltip: "Level-corrects the grayscale values in the Shading Grade Map.",
+                label: "着色等级图级别", tooltip: "级别校正着色等级图中的灰度值。",
                 propName: "_Tweak_ShadingGradeMapLevel", defaultValue: 0, min: -0.5f, max: 0.5f);
 
             public static readonly RangeProperty blureLevelSGMText = new RangeProperty(
-                label: "ShadingGradeMap Blur Level", tooltip: "The Mip Map feature is used to blur the Shading Grade Map; to enable Mip Map, turn on Advanced > Generate Mip Maps in the Texture Import Settings. The default is 0 (no blur).",
+                label: "着色等级图模糊级别", tooltip: "使用 Mip Map 功能模糊着色等级图；要启用 Mip Map，在纹理导入设置中打开高级 > 生成 Mip Map。默认值为 0（无模糊）。",
                 propName: "_BlurLevelSGM", defaultValue: 0, min: 0, max: 10);
 
             public static readonly RangeProperty rimLightMaskLevelText = new RangeProperty(
-                label: "Rim Light Mask Level", tooltip: "-1 gives 0% for the Rim Light effect, 0 gives 100% for the Rim Light and Mask effect, 1 gives 100% for the Rim Light and 0% for the Mask effect.",
+                label: "边缘光蒙版级别", tooltip: "-1 表示边缘光效果为 0%，0 表示边缘光和蒙版效果为 100%，1 表示边缘光为 100%，蒙版效果为 0%。",
                 propName: "_Tweak_RimLightMaskLevel", defaultValue: 0, min: -1, max: 1);
 
             public static readonly RangeProperty lightDirectionMaskLevelText = new RangeProperty(
-                label: "Light Direction Rim Light Level", tooltip: "Specifies intensity of Rim Light in the light source direction,",
+                label: "灯光方向边缘光级别", tooltip: "指定灯光方向中的边缘光强度。",
                 propName: "_Tweak_LightDirection_MaskLevel", defaultValue: 0, min: 0f, max: 0.5f);
 
             public static readonly RangeProperty tweakMatCapUVText = new RangeProperty(
-                label: "Scale MatCap UV", tooltip: "Scaling UV of MatCap Map.",
+                label: "调整 MatCap UV", tooltip: "缩放 MatCap Map 的 UV。",
                 propName: "_Tweak_MatCapUV", defaultValue: 0, min: -0.5f, max: 0.5f);
 
             public static readonly RangeProperty rotateMatCapUVText = new RangeProperty(
-                label: "Rotate MatCap UV", tooltip: "Rotating UV of MatCap Map.",
+                label: "旋转 MatCap UV", tooltip: "旋转 MatCap Map 的 UV。",
                 propName: "_Rotate_MatCapUV", defaultValue: 0, min: -1, max: 1);
 
             public static readonly RangeProperty matcapBlurLevelText = new RangeProperty(
-                label: "MatCap Blur Level", tooltip: "Blur MatCap Map using the Mip Map feature; to enable Mip Map, turn on Advanced > Generate Mip Maps in the Texture Import Settings. Default is 0 (no blur).",
+                label: "MatCap 模糊级别", tooltip: "使用 Mip Map 功能模糊 MatCap Map；要启用 Mip Map，在纹理导入设置中打开高级 > 生成 Mip Map。默认值为 0（无模糊）。",
                 propName: "_BlurLevelMatcap", defaultValue: 0, min: 0, max: 10);
 
             public static readonly RangeProperty arOffsetU_Text = new RangeProperty(
-                label: "Offset U", tooltip: "Adjusts the Angel Ring's shape in the horizontal direction.",
+                label: "U轴偏移", tooltip: "调整 Angel Ring 在水平方向的形状。",
                 propName: "_AR_OffsetU", defaultValue: 0, min: 0, max: 0.5f);
 
             public static readonly RangeProperty arOffsetV_Text = new RangeProperty(
-                label: "Offset V", tooltip: "Adjusts the Angel Ring's shape in the vertical direction.",
+                label: "V轴偏移", tooltip: "调整 Angel Ring 在垂直方向的形状。",
                 propName: "_AR_OffsetV", defaultValue: 0, min: 0, max: 1);
 
             public static readonly RangeProperty legacyTessEdgeLengthText = new RangeProperty(
-                label: "Edge Length", tooltip: "Divides the tessellation according to the camera's distance. The smaller the value, the smaller the tiles become.",
+                label: "边缘长度", tooltip: "根据相机距离进行细分。数值越小，瓦片越小。",
                 propName: "_TessEdgeLength", defaultValue: 5, min: 2, max: 50);
 
             public static readonly RangeProperty legacyTessPhongStrengthText = new RangeProperty(
-                label: "Phong Strength", tooltip: "Adjusts the pulling strength of the surfaces divided by tessellation.",
-                propName: "_TessPhongStrength", defaultValue: 0.5f, min: 0, max:1);
+                label: "Phong 强度", tooltip: "调整曲面在细分时的牵引强度。",
+                propName: "_TessPhongStrength", defaultValue: 0.5f, min: 0, max: 1);
 
             public static readonly RangeProperty legacyTessExtrusionAmountText = new RangeProperty(
-                label: "Extrusion Amount", tooltip: "Scale the expanded parts due to tessellation.",
+                label: "挤出量", tooltip: "根据细分缩放扩展的部分。",
                 propName: "_TessExtrusionAmount", defaultValue: 0.0f, min: -0.005f, max: 0.005f);
 
             public static readonly RangeProperty rimLightPowerText = new RangeProperty(
-                label: "Rim Light Level", tooltip: "Specifies Rim Light Intensity.",
+                label: "边缘光照级别", tooltip: "指定边缘光照强度。",
                 propName: "_RimLight_Power", defaultValue:0.1f, min: 0, max: 1);
 
             public static readonly RangeProperty invertedRimLightPowerText = new RangeProperty(
-                label: "Inverted Rim Light Level", tooltip: "Specifies Inverted/Antipodean Rim Light Level.",
+                label: "反向边缘光照级别", tooltip: "指定反向/对极边缘光照级别。",
                 propName: "_Ap_RimLight_Power", defaultValue: 0.1f, min: 0, max: 1);
 
             public static readonly RangeProperty giIntensityText = new RangeProperty(
-                label: "Light Probe Intensity", tooltip: "The light probe color is added to the material color according to the GI Intensity value.",
+                label: "光探针强度", tooltip: "根据GI强度值将光探针颜色添加到材质颜色。",
                 propName: ShaderPropGI_Intensity, defaultValue: 0.0f, min: 0, max: 1);
 
             public static readonly RangeProperty tweakMatCapMaskLevelText = new RangeProperty(
-                label: "MatCap Mask Level", "Adjusts the level of the MatCap Mask. When the value is 1, MatCap is displayed 100% irrespective of whether or not there is a mask. When the value is -1, MatCap will not be displayed at all and MatCap will be the same as in the off state.",
+                label: "MatCap 掩模级别", tooltip: "调整MatCap掩模的级别。当值为1时，MatCap将显示100%，无论是否存在掩模。当值为-1时，MatCap将完全不显示，与关闭状态下的MatCap相同。",
                 propName: "_Tweak_MatcapMaskLevel",defaultValue:0.0f, min: -1, max: 1);
 
             public static readonly RangeProperty rotate_NormalMapForMatCapUVText = new RangeProperty(
-                label: "Rotate Normal Map UV", "Rotates the MatCap normal map UV based on its center.",
+                label: "旋转法线贴图UV", tooltip: "根据其中心旋转MatCap法线贴图UV。",
                 propName: "_Rotate_NormalMapForMatCapUV", defaultValue: 0.0f, min: -1, max: 1);
 
             public static readonly RangeProperty rimLight_InsideMaskText = new RangeProperty(
-                label: "Adjust Rim Light Area", "Increasing this value narrows the area of influence of Rim Light.",
+                label: "调整边缘光区域", tooltip: "增加此值将缩小边缘光的影响区域。",
                 propName: "_RimLight_InsideMask", defaultValue: 0.0001f, min: 0.0001f, max: 1);
 
             // Float properties
-            public static readonly FloatProperty baseSpeedText = new FloatProperty(label: "Base Speed (Time)", 
-                tooltip: "Specifies the base update speed of scroll animation. If the value is 1, it will be updated in 1 second. Specifying a value of 2 results in twice the speed of a value of 1, so it will be updated in 0.5 seconds.", 
+            public static readonly FloatProperty baseSpeedText = new FloatProperty(label: "基础速度（时间）", 
+                tooltip: "指定滚动动画的基础更新速度。如果值为1，它将在1秒内更新。指定值为2将导致1值的两倍速度，因此它将在0.5秒内更新。",
                 propName: "_Base_Speed", defaultValue: 0);
 
-            public static readonly FloatProperty outlineWidthText = new FloatProperty(label: "Outline Width",
-                tooltip: "Specifies the width of the outline. This value relies on the scale when the model was imported to Unity.",
+            public static readonly FloatProperty outlineWidthText = new FloatProperty(label: "轮廓宽度",
+                tooltip: "指定轮廓的宽度。该值依赖于模型导入到Unity时的比例。",
                 propName: "_Outline_Width", defaultValue: 0);
 
-            public static readonly FloatProperty farthestDistanceText = new FloatProperty(label: "Farthest Distance to vanish",
-                tooltip: "Specify the furthest distance, where the outline width changes with the distance between the camera and the object. The outline will be zero at this distance.",
+            public static readonly FloatProperty farthestDistanceText = new FloatProperty(label: "最远消失距离",
+                tooltip: "指定最远的距离，轮廓宽度随摄像机和物体之间的距离变化。在这个距离上，轮廓将为零。",
                 propName: "_Farthest_Distance", defaultValue: 100);
 
-            public static readonly FloatProperty nearestDistanceText = new FloatProperty(label: "Nearest Distance to draw with Outline Width",
-                tooltip: "Specify the closest distance, where the outline width changes with the distance between the camera and the object. At this distance, the outline will be the maximum width set by Outline_Width.",
+            public static readonly FloatProperty nearestDistanceText = new FloatProperty(label: "最近轮廓宽度距离",
+                tooltip: "指定最近的距离，轮廓宽度随摄像机和物体之间的距离变化。在这个距离上，轮廓将为轮廓宽度设置的最大宽度。",
                 propName: "_Nearest_Distance", defaultValue: 0.5f);
 
-            public static readonly FloatProperty rotateEmissiveUVText = new FloatProperty(label: "Rotate around UV center",
-                tooltip: "When Base Speed=1, the Emissive texture will rotate clockwise by 1. When combined with scrolling, rotation will occur after scrolling.",
+            public static readonly FloatProperty rotateEmissiveUVText = new FloatProperty(label: "绕UV中心旋转",
+                tooltip: "当Base Speed=1时，发光纹理将顺时针旋转1。与滚动结合使用时，滚动后将发生旋转。",
                 propName: "_Rotate_EmissiveUV", defaultValue: 0);
 
-            public static readonly FloatProperty offsetZText = new FloatProperty(label: "Offset Outline with Camera Z-axis",
-                tooltip: "Offsets the outline in the depth (Z) direction of the camera.",
+            public static readonly FloatProperty offsetZText = new FloatProperty(label: "使用相机Z轴偏移轮廓",
+                tooltip: "在相机的深度（Z）方向上偏移轮廓。",
                 propName: "_Offset_Z", defaultValue: 0);
 
-            public static readonly FloatProperty colorShiftSpeedText = new FloatProperty(label: "Color Shifting Speed (Time)",
-                tooltip: "Sets the reference speed for color shift. When the value is 1, one cycle should take around 6 seconds.",
+            public static readonly FloatProperty colorShiftSpeedText = new FloatProperty(label: "颜色变化速度（时间）",
+                tooltip: "设置颜色变化的参考速度。当值为1时，一个周期大约需要6秒。",
                 propName: "_ColorShift_Speed", defaultValue: 0);
 
-            // Color prperties
-            public static readonly ColorProperty viewShiftText = new ColorProperty(label: "Shifting Target Color",
-                tooltip: "Target color above, must be specified in HDR.",
-                propName: "_ViewShift", isHDR: true );
+            // Color properties
+            public static readonly ColorProperty viewShiftText = new ColorProperty(label: "变色目标颜色",
+                tooltip: "上面的目标颜色，必须以HDR指定。",
+                propName: "_ViewShift", isHDR: true);
 
-            public static readonly ColorProperty colorShiftText = new ColorProperty(label: "Destination Color",
-                tooltip: "Destination color above, must be specified in HDR.",
+            public static readonly ColorProperty colorShiftText = new ColorProperty(label: "目标颜色",
+                tooltip: "上面的目标颜色，必须以HDR指定。",
                 propName: "_ColorShift", isHDR: true);
 
-            public static readonly ColorProperty rimLightColorText = new ColorProperty(label: "Rim Light Color",
-                tooltip: "Specifies the color of rim light.",
+            public static readonly ColorProperty rimLightColorText = new ColorProperty(label: "边缘光颜色",
+                tooltip: "指定边缘光的颜色。",
                 propName: "_RimLightColor", isHDR: false);
 
-            public static readonly ColorProperty apRimLightColorText = new ColorProperty(label: "Inverted Rim Light Color",
-                tooltip: "Specifies the color of inverted/antipodean rim light.",
+            public static readonly ColorProperty apRimLightColorText = new ColorProperty(label: "反向边缘光颜色",
+                tooltip: "指定反向/对极边缘光的颜色。",
                 propName: "_Ap_RimLightColor", isHDR: false);
 
-            public static readonly ColorProperty outlineColorText = new ColorProperty(label: "Outline Color",
-                tooltip: "Specifies the color of outline.",
+            public static readonly ColorProperty outlineColorText = new ColorProperty(label: "轮廓颜色",
+                tooltip: "指定轮廓的颜色。",
                 propName: "_Outline_Color", isHDR: false);
         }
         // --------------------------------
@@ -1244,7 +1246,7 @@ namespace UnityEditor.Rendering.Toon
             EditorGUILayout.EndHorizontal();
             if (isRTHSenabled)
             {
-                EditorGUILayout.LabelField("ShadowRaytracer component must be attached to the camera when this feature is enabled.");
+                EditorGUILayout.LabelField("当启用此功能时，必须将 ShadowRaytracer 组件附加到相机上。");
             }
         }
 
@@ -1446,13 +1448,13 @@ namespace UnityEditor.Rendering.Toon
             {
                 if (MaterialGetInt(material,ShaderPropUtsTechniqe) == (int)UTS_Mode.ThreeColorToon)   //DWF
                 {
-                    EditorGUILayout.LabelField("Mode: Standard", EditorStyles.boldLabel);
+                    EditorGUILayout.LabelField("模式：标准", EditorStyles.boldLabel);
                     m_MaterialEditor.TexturePropertySingleLine(Styles.firstPositionMapText, set_1st_ShadePosition);
                     m_MaterialEditor.TexturePropertySingleLine(Styles.secondPositionMapText, set_2nd_ShadePosition);
                 }
                 else if (MaterialGetInt(material,ShaderPropUtsTechniqe) == (int)UTS_Mode.ShadingGradeMap)
                 {    
-                    EditorGUILayout.LabelField("Mode: With Additional Control Maps", EditorStyles.boldLabel);
+                    EditorGUILayout.LabelField("模式：带附加控制图", EditorStyles.boldLabel);
                     m_MaterialEditor.TexturePropertySingleLine(Styles.shadingGradeMapText, shadingGradeMap);
                     GUI_RangeProperty(material, Styles.shadingGradeMapLevelText);
                     GUI_RangeProperty(material, Styles.blureLevelSGMText);
@@ -1505,7 +1507,7 @@ namespace UnityEditor.Rendering.Toon
                 var mode = MaterialGetInt(material, ShaderPropUtsTechniqe);
                 if (mode == (int)UTS_Mode.ThreeColorToon)   
                 {
-                    EditorGUILayout.LabelField("Mode: Standard", EditorStyles.boldLabel);
+                    EditorGUILayout.LabelField("模式：标准", EditorStyles.boldLabel);
                     GUI_RangeProperty(material, Styles.shaderPropBaseColorText);
                     GUI_RangeProperty(material, Styles.shaderPropBaseFeatherText);
                     GUI_RangeProperty(material, Styles.shaderPropShadeColorStepText);
@@ -1521,7 +1523,7 @@ namespace UnityEditor.Rendering.Toon
                 }
                 else if (mode == (int)UTS_Mode.ShadingGradeMap)
                 {    //SGM
-                    EditorGUILayout.LabelField("Mode: With Additional Control Maps", EditorStyles.boldLabel);
+                    EditorGUILayout.LabelField("模式：带附加控制图", EditorStyles.boldLabel);
 
                     GUI_RangeProperty(material, Styles.shaderProp1st_ShadeColor_StepText);
                     GUI_RangeProperty(material, Styles.shaderProp1st_ShadeColor_FeatherText);
@@ -1560,7 +1562,7 @@ namespace UnityEditor.Rendering.Toon
             m_MaterialEditor.TexturePropertySingleLine(Styles.normalMapText, normalMap, bumpScale);
             m_MaterialEditor.TextureScaleOffsetProperty(normalMap);
 
-            EditorGUILayout.LabelField("Normal Map Effectiveness", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("法线贴图有效性", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
 
             GUI_Toggle(material, Styles.threeBasicColorToNormalmapText, ShaderPropIs_NormalMapToBase, MaterialGetInt(material, ShaderPropIs_NormalMapToBase) != 0);
@@ -1637,7 +1639,7 @@ namespace UnityEditor.Rendering.Toon
             //Line();
             //EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField("Highlight Mask", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("高光蒙版", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             m_MaterialEditor.TexturePropertySingleLine(Styles.highColorMaskText, set_HighColorMask);
             GUI_RangeProperty(material, Styles.hilightMaskLevelText);
@@ -1782,7 +1784,7 @@ namespace UnityEditor.Rendering.Toon
             //Line();
             //EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField("MatCap Mask", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("材质球捕获蒙版", EditorStyles.boldLabel);
             m_MaterialEditor.TexturePropertySingleLine(Styles.matCapMaskText, set_MatcapMask);
             m_MaterialEditor.TextureScaleOffsetProperty(set_MatcapMask);
             GUI_RangeProperty(material, Styles.tweakMatCapMaskLevelText);
